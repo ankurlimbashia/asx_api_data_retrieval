@@ -15,7 +15,7 @@ def retrieve_data(ticker):
     if response.status_code == 200:
         st.write(response.text)
         # print("--------------------------------------------\n"+response.text)
-        data = response.json()['data']
+        # data = response.json()['data']
         # extra line
         data1 = json.dumps(response)
         return data1
