@@ -14,6 +14,7 @@ def retrieve_data(ticker):
 
     if response.status_code == 200:
         data = response.json()['data']
+        st.write(response.text)
         return data
     else:
         print(f'request status code: {response.status_code}')
