@@ -1,4 +1,4 @@
-# asx_api_data_retrieval
+# ASX API DATA RETRIEVAL
 
 Update the latest announcemets from ASX market for the following tickers
 - AEE
