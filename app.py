@@ -13,8 +13,8 @@ def retrieve_data(ticker):
     response = requests.get(url,headers=headers)
 
     if response.status_code == 200:
-        data = response.json()['data']
         st.write(response.text)
+        data = response.json()['data']
         return data
     else:
         print(f'request status code: {response.status_code}')
