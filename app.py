@@ -14,8 +14,11 @@ def retrieve_data(ticker):
 
     if response.status_code == 200:
         st.write(response.text)
+        # print("--------------------------------------------\n"+response.text)
         data = response.json()['data']
-        return data
+        # extra line
+        data1 = json.dumps(response)
+        return data1
     else:
         print(f'request status code: {response.status_code}')
 
@@ -37,6 +40,7 @@ def main():
 
         data = retrieve_data(selected_ticker)
         ticker_full_name = data[0]['issuer_full_name']
+
         
         announcements = {'title':[],'url':[],'document_release_date':[],'market_sensitive':[]}
         for d in data:
