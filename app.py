@@ -45,7 +45,7 @@ def main():
             announcements['market_sensitive'].append(d['market_sensitive'])
         
         announcements = pd.DataFrame(announcements)
-        announcements[data[0]['issuer_full_name']] = announcements.apply(lambda row: f'<a href="{row['url']}" target="_blank">{row['title']}</a>', axis=1)
+        announcements[data[0]['issuer_full_name']] = announcements.apply(lambda row: f'<a href="{row["url"]}" target="_blank">{row["title"]}</a>', axis=1)
         announcements['document_release_date'] = pd.to_datetime(announcements['document_release_date']) 
         st.markdown(announcements[[data[0]['issuer_full_name'],'document_release_date','market_sensitive']].to_html(escape=False, index=False), unsafe_allow_html=True)
     
