@@ -38,7 +38,7 @@ def main():
         ticker_full_name = data[0]['issuer_full_name']
         
         announcements = {'title':[],'url':[],'document_release_date':[],'market_sensitive':[]}
-        for d in data:P
+        for d in data:
             announcements['title'].append(d['header'])
             announcements['url'].append(d['url'])
             announcements['document_release_date'].append(d['document_release_date'])
