@@ -7,3 +7,4 @@ Update the latest announcemets from ASX market for the following tickers
 - 1MC
 - NRZ
 
+[The link to the streamlit web-application](https://asxapidataretrieval.streamlit.app/)
