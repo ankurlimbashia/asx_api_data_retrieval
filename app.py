@@ -11,30 +11,12 @@ def retrieve_data(ticker):
         'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
     }
 
-    response = requests.get(url,headers=None)
+    response = requests.get(url,headers=headers)
 
     if response.status_code == 200:
         st.write(response.text)
-        # print("--------------------------------------------\n"+response.text)
-        # data = response.json()['data']
-        # extra line
-        # data1 = json.dumps(response)
-        data = {"data":[   {
-      "id": "02839968",
-      "document_release_date": "2024-08-15T14:53:40+1000",
-      "document_date": "2024-08-15T14:52:28+1000",
-      "url": "https://announcements.asx.com.au/asxpdf/20240815/pdf/066nj3f5lb1dpm.pdf",
-      "relative_url": "/asxpdf/20240815/pdf/066nj3f5lb1dpm.pdf",
-      "header": "Notification regarding unquoted securities - AEE",
-      "market_sensitive": False,
-      "number_of_pages": 7,
-      "size": "21.5KB",
-      "legacy_announcement": False,
-      "issuer_code": "AEE",
-      "issuer_short_name": "AURA EN",
-      "issuer_full_name": "AURA ENERGY LIMITED"
-    },]}
-        return data['data']
+        data = response.json()['data']
+        return data
     else:
         print(f'request status code: {response.status_code}')
 
@@ -58,17 +40,17 @@ def main():
         ticker_full_name = data[0]['issuer_full_name']
 
         
-        announcements = {'title':[],'url':[],'document_release_date':[],'market_sensitive':[]}
+        announcements = {'title':[],'url':[],'document_release_date':[]}
         for d in data:
             announcements['title'].append(d['header'])
             announcements['url'].append(d['url'])
             announcements['document_release_date'].append(d['document_release_date'])
-            announcements['market_sensitive'].append(d['market_sensitive'])
+            # announcements['market_sensitive'].append(d['market_sensitive'])
         
         announcements = pd.DataFrame(announcements)
         announcements[data[0]['issuer_full_name']] = announcements.apply(lambda row: f'<a href="{row["url"]}" target="_blank">{row["title"]}</a>', axis=1)
         announcements['document_release_date'] = pd.to_datetime(announcements['document_release_date']) 
-        st.markdown(announcements[[data[0]['issuer_full_name'],'document_release_date','market_sensitive']].to_html(escape=False, index=False), unsafe_allow_html=True)
+        st.markdown(announcements[[data[0]['issuer_full_name'],'document_release_date']].to_html(escape=False, index=False), unsafe_allow_html=True)
     
     else:
         tickers_with_trading_halt = {'ticker':[],'ticker_full_name':[]}
