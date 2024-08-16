@@ -1,5 +1,5 @@
 import requests
-import yaml
+import yaml,os
 import pandas as pd
 import streamlit as st
 
@@ -8,7 +8,9 @@ _config = {}
 def load_config():
     global _config
 
-    with open('config.yml','r') as file:
+    yml_filepath = os.path.dirname(__file__) + '/config.yml'
+
+    with open(yml_filepath,'r') as file:
         _config = yaml.safe_load(file)
 
 def get_config_value(key):
