@@ -8,9 +8,7 @@ _config = {}
 def load_config():
     global _config
 
-    yaml_path = 'config.yaml'
-
-    with open('config.yaml','r') as file:
+    with open('config.yml','r') as file:
         _config = yaml.safe_load(file)
 
 def get_config_value(key):
