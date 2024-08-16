@@ -3,9 +3,13 @@ import yaml,os
 import pandas as pd
 import streamlit as st
 
+# to lead the config data
 _config = {}
 
 def load_config():
+    """
+    loads the configuration from config.yml
+    """
     global _config
 
     yml_filepath = os.path.dirname(__file__) + '/config.yml'
@@ -14,6 +18,9 @@ def load_config():
         _config = yaml.safe_load(file)
 
 def get_config_value(key):
+    """
+    returns the value of the given configuration key
+    """
     global _config
 
     if _config.get(key) is not None:
@@ -25,18 +32,24 @@ def get_config_value(key):
 
 
 def retrieve_data(ticker):
+    """
+    returns the data from API if API responds to the request
+    """
+
     url = get_config_value('asx_announcements_url') % ticker.upper()
 
     response = requests.get(url,headers=get_config_value('headers'))
+
     try:
         return response.json()['data']
     except:
         st.write(f'Response Status Code: {response.status_code}')
-        st.write(f'{response.text}')    
+        st.write(f'{response.text}',unsafe_allow_html=True)    
 
 
 
 def main():
+
     tickers = sorted(get_config_value('tickers'))
     st.set_page_config(page_title = 'ASX API Data Retrieval', 
                 page_icon='📰'
@@ -51,7 +64,7 @@ def main():
         selected_ticker = st.selectbox("Tickers",tickers)
         data = retrieve_data(selected_ticker)
         
-        if data is not None:
+        if data is not None: # check the request response
             announcements = {'title':[],'url':[],'document_release_date':[]}
             for d in data:
                 announcements['title'].append(d['header'])
@@ -67,7 +80,7 @@ def main():
         tickers_with_trading_halt = {'ticker':[],'ticker_full_name':[]}
         for ticker in tickers:
             data = retrieve_data(ticker)
-            if data is None:
+            if data is None: # check the request response
                 break
             for d in data:
                 if 'Trading Halt'.lower() in d['header'].lower():
