@@ -6,3 +6,4 @@ Update the latest announcemets from ASX market for the following tickers
 - 1AE
 - 1MC
 - NRZ
+
