@@ -1,5 +1,5 @@
 import requests
-import yaml,os
+import yaml,os,json
 import pandas as pd
 import streamlit as st
 
@@ -43,8 +43,10 @@ def retrieve_data(ticker):
     try:
         return response.json()['data']
     except:
-        st.write(f'Response Status Code: {response.status_code}')
-        st.write(f'Response from API: \n\n{response.text}')  
+        # st.write(f'Response Status Code: {response.status_code}')
+        # st.write(f'Response from API: \n\n{response.text}')  
+        json_filepath = os.path.dirname(__file__) + f'/data/{ticker}.json'
+        return json.load(open(json_filepath,'r'))['data']
 
 
 
