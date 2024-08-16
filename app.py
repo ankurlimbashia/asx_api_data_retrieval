@@ -11,7 +11,7 @@ def load_config():
     yml_filepath = os.path.dirname(__file__) + '/config.yml'
 
     with open(yml_filepath,'r') as file:
-        _config = yaml.safe_load(file)
+        _config = yaml.safe_load_all(file)
 
 def get_config_value(key):
     global _config
