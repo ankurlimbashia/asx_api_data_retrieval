@@ -20,7 +20,7 @@ def get_config_value(key):
         return _config.get(key)
     else:
         load_config()
-        st.write(type(_config))
+        st.write(_config)
         return _config.get(key,'key does not exist')
 
 
