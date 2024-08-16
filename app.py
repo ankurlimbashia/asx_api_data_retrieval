@@ -44,8 +44,7 @@ def retrieve_data(ticker):
         return response.json()['data']
     except:
         st.write(f'Response Status Code: {response.status_code}')
-        # st.markdown(f'{response.text}')
-        st.html(response.text)    
+        st.write(f'Response from API: \n\n{response.text}')  
 
 
 
