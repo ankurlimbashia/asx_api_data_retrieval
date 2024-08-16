@@ -11,7 +11,7 @@ def load_config():
     yml_filepath = os.path.dirname(__file__) + '/config.yml'
 
     with open(yml_filepath,'r') as file:
-        _config = yaml.safe_load_all(file)
+        _config = yaml.safe_load(file)
 
 def get_config_value(key):
     global _config
@@ -20,7 +20,6 @@ def get_config_value(key):
         return _config.get(key)
     else:
         load_config()
-        st.write(_config)
         return _config.get(key,'key does not exist')
 
 
