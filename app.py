@@ -19,7 +19,21 @@ def retrieve_data(ticker):
         # data = response.json()['data']
         # extra line
         # data1 = json.dumps(response)
-        data = {"data":[{"id":"02839968"}]}
+        data = {"data":[   {
+      "id": "02839968",
+      "document_release_date": "2024-08-15T14:53:40+1000",
+      "document_date": "2024-08-15T14:52:28+1000",
+      "url": "https://announcements.asx.com.au/asxpdf/20240815/pdf/066nj3f5lb1dpm.pdf",
+      "relative_url": "/asxpdf/20240815/pdf/066nj3f5lb1dpm.pdf",
+      "header": "Notification regarding unquoted securities - AEE",
+      "market_sensitive": False,
+      "number_of_pages": 7,
+      "size": "21.5KB",
+      "legacy_announcement": False,
+      "issuer_code": "AEE",
+      "issuer_short_name": "AURA EN",
+      "issuer_full_name": "AURA ENERGY LIMITED"
+    },]}
         return data['data']
     else:
         print(f'request status code: {response.status_code}')
